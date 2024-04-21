@@ -1,0 +1,64 @@
+plugins {
+  id 'java'
+  id 'application'
+//  id 'org.javamodularity.moduleplugin' version '1.8.12'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
+  id 'org.beryx.jlink' version '2.25.0'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+  maven { url 'https://mvnrepository.com/artifact/net.kemitix/sqlite-dialect'}
+}
+
+ext {
+  junitVersion = '5.10.0'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+//tasks.withType(JavaCompile) {
+//  options.encoding = 'UTF-8'
+//}
+
+application {
+//  mainModule = 'org.example.aplicatie'
+  mainClass = 'org.example.aplicatie.AplicatieBiblioteca'
+}
+
+javafx {
+  version = '17.0.6'
+  modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+  implementation 'org.slf4j:slf4j-api:1.7.32'
+  implementation 'ch.qos.logback:logback-classic:1.4.14'
+
+  implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.45.1.0'
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+  implementation 'org.hibernate:hibernate-core:5.6.4.Final'
+  implementation 'org.hibernate:hibernate-entitymanager:5.6.4.Final'
+    implementation 'org.projectlombok:lombok:1.18.30'
+  implementation group: 'com.zsoltfabok', name: 'sqlite-dialect', version: '1.0'
+}
+
+test {
+useJUnitPlatform()}
+
+jlink {
+  imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+  options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+  launcher {
+    name = 'app'
+  }
+}
+
+jlinkZip {
+  group = 'distribution'
+}
