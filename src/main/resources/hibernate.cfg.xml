@@ -27,12 +27,5 @@
         <mapping class="org.example.aplicatie.Domain.Administrator"/>
         <mapping class="org.example.aplicatie.Domain.Bibliotecar"/>
         <mapping class="org.example.aplicatie.Domain.ExemplarCarte"/>
-<!--        <mapping class="org.example.aplicatie.Domain.Imprumut"/>-->
-<!--        <mapping class="org.example.aplicatie.Domain.Autor"/>-->
-
-
-<!--        <mapping class="com.test.entity.Category"/>-->
-        <!-- DB schema will be updated if needed -->
-        <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>
 </hibernate-configuration>

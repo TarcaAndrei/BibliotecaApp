@@ -53,4 +53,13 @@ public class ExemplarCarte extends Entitate{
     public void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "ExemplarCarte{" +
+                "carte=" + carte +
+                ", codExemplar='" + codExemplar + '\'' +
+                ", status=" + status +
+                "} " + super.toString();
+    }
 }

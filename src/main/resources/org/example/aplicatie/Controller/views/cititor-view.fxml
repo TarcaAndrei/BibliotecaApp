@@ -41,7 +41,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>
-                  <Label fx:id="titluAutorExemplare" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="205.0" />
+                  <Label fx:id="titluAutorExemplare" alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="362.0" />
                   <TableView fx:id="tabelExemplare" prefHeight="292.0" prefWidth="392.0">
                     <columns>
                       <TableColumn fx:id="coloanaExemplar" prefWidth="75.0" text="ID Exemplar" />

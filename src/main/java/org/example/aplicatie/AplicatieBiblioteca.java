@@ -40,10 +40,16 @@ public class AplicatieBiblioteca extends Application {
         ///TODO: IN continuare cu celelate entitai
         ///TODO: Eventual un server aside?
         ///Sau de fiecare data cand se deschide aplicatia sa se faca o conexiune la baza de date
-        RepositoryUtilizator<Bibliotecar> bibliotecarRepositoryUtilizator = new RepositoryDBBibliotecari(propertiesDB);
-        RepositoryUtilizator<Administrator> administratorRepositoryUtilizator = new RepositoryDBAdministratori(propertiesDB);
-        RepositoryCarte repositoryCarte = new RepositoryDBCarti(propertiesDB);
-        RepositoryExemplarCarte repositoryExemplareCarti = new RepositoryDBExemplareCarti(propertiesDB, repositoryCarte);
+        RepositoryUtilizator<Bibliotecar> bibliotecarRepositoryUtilizator = new RepositoryHBBibliotecari(sessionFactory);
+//        RepositoryUtilizator<Bibliotecar> bibliotecarRepositoryUtilizator = new RepositoryDBBibliotecari(propertiesDB);
+        RepositoryUtilizator<Administrator> administratorRepositoryUtilizator = new RepositoryHBAdministratori(sessionFactory);
+//        RepositoryUtilizator<Administrator> administratorRepositoryUtilizator = new RepositoryDBAdministratori(propertiesDB);
+        RepositoryCarte repositoryCarte = new RepositoryHBCarti(sessionFactory);
+//        RepositoryCarte repositoryCarte = new RepositoryDBCarti(propertiesDB);
+//        RepositoryExemplarCarte repositoryExemplareCarti = new RepositoryDBExemplareCarti(propertiesDB, repositoryCarte);
+        RepositoryExemplarCarte repositoryExemplareCarti = new RepositoryHBExemplareCarti(sessionFactory);
+
+
         RepositoryImprumut repositoryImprumut = new RepositoryDBImprumuturi(propertiesDB, cititorRepositoryUtilizator, repositoryExemplareCarti);
         ServiceApp serviceApp = new ServiceApp(cititorRepositoryUtilizator, bibliotecarRepositoryUtilizator, administratorRepositoryUtilizator, repositoryCarte, repositoryExemplareCarti, repositoryImprumut);
         controller.setService(serviceApp);
