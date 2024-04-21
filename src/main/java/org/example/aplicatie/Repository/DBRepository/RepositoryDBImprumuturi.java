@@ -1,8 +1,10 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.DBRepository;
 
 import org.example.aplicatie.Domain.Cititor;
 import org.example.aplicatie.Domain.Imprumut;
-import org.example.aplicatie.Domain.Status;
+import org.example.aplicatie.Repository.RepositoryExemplarCarte;
+import org.example.aplicatie.Repository.RepositoryImprumut;
+import org.example.aplicatie.Repository.RepositoryUtilizator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,13 +1,13 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.HBRepository;
 
 import org.example.aplicatie.Domain.Carte;
-import org.example.aplicatie.Domain.Carte;
+import org.example.aplicatie.Repository.RepositoryCarte;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
-public class RepositoryHBCarti implements RepositoryCarte{
+public class RepositoryHBCarti implements RepositoryCarte {
     private SessionFactory sessionFactory;
 
     public RepositoryHBCarti(SessionFactory sessionFactory) {

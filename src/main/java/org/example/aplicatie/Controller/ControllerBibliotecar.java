@@ -80,6 +80,7 @@ public class ControllerBibliotecar implements Observer {
         if(imprumut != null){
             try {
                 serviceApp.returneazaImprumut(imprumut.getId());
+                MessageAlert.showMessage(null, Alert.AlertType.INFORMATION, "Succes", "Imprumut returnat cu succes");
             }
             catch (Exception e){
                 MessageAlert.showMessage(null, Alert.AlertType.ERROR, "Eroare", e.getMessage());

@@ -1,22 +1,23 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.HBRepository;
 
-import org.example.aplicatie.Domain.Bibliotecar;
 import org.example.aplicatie.Domain.Cititor;
+import org.example.aplicatie.Repository.RepositoryUtilizator;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 import java.util.Optional;
 
-public class RepositoryHBBibliotecari implements RepositoryUtilizator<Bibliotecar>{
+public class RepositoryHBCititori implements RepositoryUtilizator<Cititor> {
     private SessionFactory sessionFactory;
 
-    public RepositoryHBBibliotecari(SessionFactory sessionFactory) {
+    public RepositoryHBCititori(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
+
     @Override
-    public Optional<Bibliotecar> findByUsername(String username) {
+    public Optional<Cititor> findByUsername(String username) {
         try(var session = sessionFactory.openSession()){
-            var query = session.createQuery("SELECT B FROM Bibliotecar B WHERE B.username = :username", Bibliotecar.class);
+            var query = session.createQuery("SELECT C FROM Cititor C WHERE C.username = :username", Cititor.class);
             query.setParameter("username", username);
             return Optional.ofNullable(query.uniqueResult());
         }
@@ -26,9 +27,9 @@ public class RepositoryHBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> findByUsernameAndPassword(String username, String password) {
+    public Optional<Cititor> findByUsernameAndPassword(String username, String password) {
         try(var session = sessionFactory.openSession()){
-            var query = session.createQuery("SELECT B FROM Bibliotecar B WHERE B.username = :username AND B.password = :password", Bibliotecar.class);
+            var query = session.createQuery("SELECT C FROM Cititor C WHERE C.username = :username AND C.password = :password", Cititor.class);
             query.setParameter("username", username);
             query.setParameter("password", password);
             return Optional.ofNullable(query.uniqueResult());
@@ -39,7 +40,7 @@ public class RepositoryHBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> save(Bibliotecar entity) {
+    public Optional<Cititor> save(Cititor entity) {
         try(var session = sessionFactory.openSession()){
             var transaction = session.beginTransaction();
             session.save(entity);
@@ -52,7 +53,7 @@ public class RepositoryHBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> update(Bibliotecar entity) {
+    public Optional<Cititor> update(Cititor entity) {
         try(var session = sessionFactory.openSession()){
             var transaction = session.beginTransaction();
             session.update(entity);
@@ -65,16 +66,15 @@ public class RepositoryHBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> delete(Integer idEntity) {
-        var biblioOpt = findOne(idEntity);
-        if(biblioOpt.isEmpty()){
+    public Optional<Cititor> delete(Integer idEntity) {
+        var cititorOpt = findOne(idEntity);
+        if(cititorOpt.isEmpty())
             return Optional.empty();
-        }
         try(var session = sessionFactory.openSession()){
             var transaction = session.beginTransaction();
-            session.delete(biblioOpt.get());
+            session.delete(cititorOpt.get());
             transaction.commit();
-            return biblioOpt;
+            return cititorOpt;
         }
         catch (Exception e){
             return Optional.empty();
@@ -82,9 +82,9 @@ public class RepositoryHBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> findOne(Integer idEntity) {
+    public Optional<Cititor> findOne(Integer idEntity) {
         try(var session = sessionFactory.openSession()){
-            var cititor = session.get(Bibliotecar.class, idEntity);
+            var cititor = session.get(Cititor.class, idEntity);
             return Optional.ofNullable(cititor);
         }
         catch (Exception e){
@@ -93,9 +93,9 @@ public class RepositoryHBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public List<Bibliotecar> findAll() {
+    public List<Cititor> findAll() {
         try(var session = sessionFactory.openSession()){
-            return session.createQuery("SELECT B FROM Bibliotecar B", Bibliotecar.class).list();
+            return session.createQuery("SELECT C FROM Cititor C", Cititor.class).list();
         }
         catch (Exception e){
             return List.of();

@@ -1,7 +1,7 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.DBRepository;
 
-import org.example.aplicatie.Domain.Bibliotecar;
 import org.example.aplicatie.Domain.Cititor;
+import org.example.aplicatie.Repository.RepositoryUtilizator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,28 +12,28 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class RepositoryDBBibliotecari implements RepositoryUtilizator<Bibliotecar>{
+public class RepositoryDBCititori implements RepositoryUtilizator<Cititor> {
     private UtilsDB dbUtils;
 
-    public RepositoryDBBibliotecari(Properties props) {
+    public RepositoryDBCititori(Properties props) {
         this.dbUtils = new UtilsDB(props);
     }
 
     @Override
-    public Optional<Bibliotecar> findByUsername(String username) {
+    public Optional<Cititor> findByUsername(String username) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStmt = con.prepareStatement("select * from Bibliotecari where USERNAME=?")) {
+        try (PreparedStatement preStmt = con.prepareStatement("select * from Cititori where USERNAME=?")) {
             preStmt.setString(1, username);
             try (ResultSet result = preStmt.executeQuery()) {
                 if (result.next()) {
-                    int idEntity = result.getInt("ID_BIBLIOTECAR");
+                    int idEntity = result.getInt("ID_CITITOR");
                     String nume = result.getString("NUME");
 //                    String username = result.getString("USERNAME");
                     String password = result.getString("PAROLA");
                     String adresa = result.getString("ADRESA");
                     String telefon = result.getString("TELEFON");
                     String cnp = result.getString("CNP");
-                    Bibliotecar utilizator = new Bibliotecar(username, password, nume, telefon, cnp, adresa);
+                    Cititor utilizator = new Cititor(username, password, nume, telefon, cnp, adresa);
                     utilizator.setId(idEntity);
                     return Optional.of(utilizator);
                 }
@@ -47,21 +47,21 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> findByUsernameAndPassword(String username, String password) {
+    public Optional<Cititor> findByUsernameAndPassword(String username, String password) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStmt = con.prepareStatement("select * from Bibliotecari where USERNAME=? AND PAROLA=?")) {
+        try (PreparedStatement preStmt = con.prepareStatement("select * from Cititori where USERNAME=? AND PAROLA=?")) {
             preStmt.setString(1, username);
             preStmt.setString(2, password);
             try (ResultSet result = preStmt.executeQuery()) {
                 if (result.next()) {
-                    int idEntity = result.getInt("ID_BIBLIOTECAR");
+                    int idEntity = result.getInt("ID_CITITOR");
                     String nume = result.getString("NUME");
 //                    String username = result.getString("USERNAME");
 //                    String password = result.getString("PAROLA");
                     String adresa = result.getString("ADRESA");
                     String telefon = result.getString("TELEFON");
                     String cnp = result.getString("CNP");
-                    Bibliotecar utilizator = new Bibliotecar(username, password, nume, telefon, cnp, adresa);
+                    Cititor utilizator = new Cititor(username, password, nume, telefon, cnp, adresa);
                     utilizator.setId(idEntity);
                     return Optional.of(utilizator);
                 }
@@ -75,9 +75,9 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> save(Bibliotecar entity) {
+    public Optional<Cititor> save(Cititor entity) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStmt = con.prepareStatement("insert into Bibliotecari(USERNAME, PAROLA, NUME, ADRESA, TELEFON, CNP) values (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement preStmt = con.prepareStatement("insert into Cititori(USERNAME, PAROLA, NUME, ADRESA, TELEFON, CNP) values (?,?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS)) {
             preStmt.setString(1, entity.getUsername());
             preStmt.setString(2, entity.getPassword());
             preStmt.setString(3, entity.getNume());
@@ -102,9 +102,9 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> update(Bibliotecar entity) {
+    public Optional<Cititor> update(Cititor entity) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStmt = con.prepareStatement("UPDATE Bibliotecari SET username = ?, parola = ?, NUME = ?, adresa = ?, telefon = ?, cnp = ? WHERE id_bibliotecar=?")) {
+        try (PreparedStatement preStmt = con.prepareStatement("UPDATE Cititori SET username = ?, parola = ?, NUME = ?, adresa = ?, telefon = ?, cnp = ? WHERE id_cititor=?")) {
             preStmt.setString(1, entity.getUsername());
             preStmt.setString(2, entity.getPassword());
             preStmt.setString(3, entity.getNume());
@@ -125,10 +125,10 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> delete(Integer idEntity) {
+    public Optional<Cititor> delete(Integer idEntity) {
         Connection con = dbUtils.getConnection();
         var utilizator = findOne(idEntity);
-        try (PreparedStatement preStmt = con.prepareStatement("delete from Bibliotecari where id_bibliotecar=?")) {
+        try (PreparedStatement preStmt = con.prepareStatement("delete from Cititori where id_cititor=?")) {
             preStmt.setInt(1, idEntity);
             int result = preStmt.executeUpdate();
             return utilizator;
@@ -138,9 +138,9 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public Optional<Bibliotecar> findOne(Integer idEntity) {
+    public Optional<Cititor> findOne(Integer idEntity) {
         Connection con = dbUtils.getConnection();
-        try (PreparedStatement preStmt = con.prepareStatement("select * from Bibliotecari where id_bibliotecar=?")) {
+        try (PreparedStatement preStmt = con.prepareStatement("select * from Cititori where id_cititor=?")) {
             preStmt.setInt(1, idEntity);
             try (ResultSet result = preStmt.executeQuery()) {
                 if (result.next()) {
@@ -150,7 +150,7 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
                     String adresa = result.getString("ADRESA");
                     String telefon = result.getString("TELEFON");
                     String cnp = result.getString("CNP");
-                    Bibliotecar utilizator = new Bibliotecar(username, password, nume, telefon, cnp, adresa);
+                    Cititor utilizator = new Cititor(username, password, nume, telefon, cnp, adresa);
                     utilizator.setId(idEntity);
                     return Optional.of(utilizator);
                 }
@@ -164,10 +164,10 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
     }
 
     @Override
-    public List<Bibliotecar> findAll() {
+    public List<Cititor> findAll() {
         Connection con = dbUtils.getConnection();
-        List<Bibliotecar> utilizatori = new ArrayList<>();
-        try (PreparedStatement preStmt = con.prepareStatement("select * from Bibliotecari")) {
+        List<Cititor> utilizatori = new ArrayList<>();
+        try (PreparedStatement preStmt = con.prepareStatement("select * from cititori")) {
             try (ResultSet result = preStmt.executeQuery()) {
                 while (result.next()) {
                     int idEntity = result.getInt("ID_CITITOR");
@@ -177,7 +177,7 @@ public class RepositoryDBBibliotecari implements RepositoryUtilizator<Biblioteca
                     String adresa = result.getString("ADRESA");
                     String telefon = result.getString("TELEFON");
                     String cnp = result.getString("CNP");
-                    Bibliotecar utilizator = new Bibliotecar(username, password, nume, telefon, cnp, adresa);
+                    Cititor utilizator = new Cititor(username, password, nume, telefon, cnp, adresa);
                     utilizator.setId(idEntity);
                     utilizatori.add(utilizator);
                 }

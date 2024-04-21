@@ -1,7 +1,7 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.HBRepository;
 
 import org.example.aplicatie.Domain.Administrator;
-import org.example.aplicatie.Domain.Administrator;
+import org.example.aplicatie.Repository.RepositoryUtilizator;
 import org.hibernate.SessionFactory;
 
 import java.util.List;

@@ -45,12 +45,10 @@ public class ServiceApp implements Observable {
         var exemplarCarte = repositoryExemplareCarti.findOne(idExemplarCarte).get();
         exemplarCarte.setStatus(Status.IMPRUMUTAT);
         var imprumut = new Imprumut(cititor, exemplarCarte, LocalDate.now(), false);
-        try{
-            repositoryExemplareCarti.update(exemplarCarte);
-            repositoryImprumut.save(imprumut);
-        }
-        catch (Exception e){
-            throw new RuntimeException("Ceva ii problema");
+        var opt1 = repositoryExemplareCarti.update(exemplarCarte);
+        var opt2 = repositoryImprumut.save(imprumut);
+        if(opt1.isEmpty() || opt2.isEmpty()){
+            throw new RuntimeException("Avem o problema");
         }
         this.notifyAllObservers(EventType.IMPRUMUT);
     }
@@ -59,12 +57,10 @@ public class ServiceApp implements Observable {
         var imprumut = repositoryImprumut.returneazaImprumut(idImprumut).get();
         var exemplarCarte = repositoryExemplareCarti.findOne(imprumut.getExemplarCarte().getId()).get();
         exemplarCarte.setStatus(Status.DISPONIBIL);
-        try{
-            repositoryImprumut.returneazaImprumut(idImprumut);
-            repositoryExemplareCarti.update(exemplarCarte);
-        }
-        catch (Exception e){
-            throw new RuntimeException("Ceva ii problema");
+        var opt1 = repositoryImprumut.returneazaImprumut(idImprumut);
+        var opt2 =repositoryExemplareCarti.update(exemplarCarte);
+        if(opt1.isEmpty() || opt2.isEmpty()){
+            throw new RuntimeException("Avem o problema");
         }
         this.notifyAllObservers(EventType.RETURNARE);
     }

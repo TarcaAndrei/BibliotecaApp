@@ -1,6 +1,7 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.DBRepository;
 
 import org.example.aplicatie.Domain.Administrator;
+import org.example.aplicatie.Repository.RepositoryUtilizator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class RepositoryDBAdministratori implements RepositoryUtilizator<Administrator>{
+public class RepositoryDBAdministratori implements RepositoryUtilizator<Administrator> {
     private UtilsDB dbUtils;
 
     public RepositoryDBAdministratori(Properties props) {

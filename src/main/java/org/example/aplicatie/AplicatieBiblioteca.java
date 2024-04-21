@@ -8,8 +8,9 @@ import org.example.aplicatie.Controller.ControllerAutentificare;
 import org.example.aplicatie.Domain.Administrator;
 import org.example.aplicatie.Domain.Bibliotecar;
 import org.example.aplicatie.Domain.Cititor;
-import org.example.aplicatie.Domain.Status;
 import org.example.aplicatie.Repository.*;
+import org.example.aplicatie.Repository.DBRepository.RepositoryDBImprumuturi;
+import org.example.aplicatie.Repository.HBRepository.*;
 import org.example.aplicatie.Service.ServiceApp;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -50,7 +51,8 @@ public class AplicatieBiblioteca extends Application {
         RepositoryExemplarCarte repositoryExemplareCarti = new RepositoryHBExemplareCarti(sessionFactory);
 
 
-        RepositoryImprumut repositoryImprumut = new RepositoryDBImprumuturi(propertiesDB, cititorRepositoryUtilizator, repositoryExemplareCarti);
+//        RepositoryImprumut repositoryImprumut = new RepositoryDBImprumuturi(propertiesDB, cititorRepositoryUtilizator, repositoryExemplareCarti);
+        RepositoryImprumut repositoryImprumut = new RepositoryHBImprumuturi(sessionFactory);
         ServiceApp serviceApp = new ServiceApp(cititorRepositoryUtilizator, bibliotecarRepositoryUtilizator, administratorRepositoryUtilizator, repositoryCarte, repositoryExemplareCarti, repositoryImprumut);
         controller.setService(serviceApp);
         stage.setScene(scene);

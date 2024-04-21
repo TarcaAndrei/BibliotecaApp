@@ -41,18 +41,18 @@ public class Carte extends Entitate{
         this.autor = autor;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Carte carte = (Carte) o;
-        return Objects.equals(titlu, carte.titlu) && Objects.equals(autor, carte.autor);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(titlu, autor);
-    }
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Carte carte = (Carte) o;
+//        return Objects.equals(titlu, carte.titlu) && Objects.equals(autor, carte.autor);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(titlu, autor);
+//    }
 
     @Override
     public String toString() {

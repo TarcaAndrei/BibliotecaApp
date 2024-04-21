@@ -161,7 +161,8 @@ public class ControllerAutentificare {
         var telefon = telefonTextField.getText();
         if(username.isEmpty() || nume.isEmpty() || password.isEmpty() || cnp.isEmpty() || adresa.isEmpty() || telefon.isEmpty()){
             MessageAlert.showMessage(null, Alert.AlertType.ERROR, "Eroare", "Toate campurile sunt obligatorii");
-            handlerCancel(actionEvent);
+            return;
+//            handlerCancel(actionEvent);
         }
         if (regCititor.isSelected()) {
             registerCititor(username, nume, password, cnp, adresa, telefon);
@@ -176,6 +177,7 @@ public class ControllerAutentificare {
     private void registerCititor(String username, String nume, String password, String cnp, String adresa, String telefon) {
         try {
             service.registerCititor(username, nume, password, cnp, adresa, telefon);
+            MessageAlert.showMessage(null, Alert.AlertType.INFORMATION, "Succes", "Contul a fost creat cu succes");
             handlerCancel(null);
         } catch (RuntimeException ex) {
             MessageAlert.showMessage(null, Alert.AlertType.ERROR, "Eroare", ex.getMessage());
@@ -185,6 +187,8 @@ public class ControllerAutentificare {
     private void registerBibliotecar(String username, String nume, String password, String cnp, String adresa, String telefon) {
         try {
             service.registerBibliotecar(username, nume, password, cnp, adresa, telefon);
+            MessageAlert.showMessage(null, Alert.AlertType.INFORMATION, "Succes", "Contul a fost creat cu succes");
+            handlerCancel(null);
         } catch (RuntimeException ex) {
             MessageAlert.showMessage(null, Alert.AlertType.ERROR, "Eroare", ex.getMessage());
         }
@@ -193,6 +197,8 @@ public class ControllerAutentificare {
     private void registerAdministrator(String username, String nume, String password, String cnp, String adresa, String telefon) {
         try {
             service.registerAdministrator(username, nume, password, cnp, adresa, telefon);
+            MessageAlert.showMessage(null, Alert.AlertType.INFORMATION, "Succes", "Contul a fost creat cu succes");
+            handlerCancel(null);
         } catch (RuntimeException ex) {
             MessageAlert.showMessage(null, Alert.AlertType.ERROR, "Eroare", ex.getMessage());
         }

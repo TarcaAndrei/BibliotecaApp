@@ -1,4 +1,4 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.DBRepository;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -27,5 +27,6 @@
         <mapping class="org.example.aplicatie.Domain.Administrator"/>
         <mapping class="org.example.aplicatie.Domain.Bibliotecar"/>
         <mapping class="org.example.aplicatie.Domain.ExemplarCarte"/>
+        <mapping class="org.example.aplicatie.Domain.Imprumut"/>
     </session-factory>
 </hibernate-configuration>

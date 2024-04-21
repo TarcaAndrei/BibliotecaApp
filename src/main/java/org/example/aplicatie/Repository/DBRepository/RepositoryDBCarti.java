@@ -1,6 +1,7 @@
-package org.example.aplicatie.Repository;
+package org.example.aplicatie.Repository.DBRepository;
 
 import org.example.aplicatie.Domain.Carte;
+import org.example.aplicatie.Repository.RepositoryCarte;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-public class RepositoryDBCarti implements RepositoryCarte{
+public class RepositoryDBCarti implements RepositoryCarte {
     private UtilsDB dbUtils;
     
     public RepositoryDBCarti(Properties props) {
